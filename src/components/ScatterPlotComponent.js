@@ -21,6 +21,7 @@ class Scatterplotcomponent extends Component{
     ctx.fillStyle=color;
     ctx.beginPath();
     ctx.arc(upperLeftCornerX,upperLeftCornerY,10,0,2*Math.PI);
+    // ctx.fillText(upperLeftCornerX+ ' , '+upperLeftCornerY, 10, 2);
     ctx.fill();
     ctx.stroke();
     ctx.restore();
@@ -67,23 +68,40 @@ getCanvasHeight(){
     return maxHeight;
 }
 
+setXaxisTips(){
+    const canvas = this.refs.canvas;
+    let ctx = canvas.getContext("2d");
+    let i = canvas.width;
+    while(i>0){
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(i,-20);
+        ctx.fillText(i,10);
+        ctx.restore();
+        i = i/10;
+    }
+    
+  
+}
+
 scatterPlotChart(){
 	const canvas = this.refs.canvas;
     canvas.width = this.getCanvasWidth();
     canvas.height = this.getCanvasHeight();
     let ctx = canvas.getContext("2d");
+    ctx.translate(0, canvas.height);
+    ctx.scale(1, -1);
     this.options.gridScale = 5;
     var maxValue = 10;
     var canvasActualHeight = canvas.height;
     var canvasActualWidth = canvas.width;
     console.log("maxValue  ",maxValue)
-    
+
         //drawing the grid lines
         let gridY = 0;
 
-        for(let i=0; i< canvas.height/10; i++){
-            gridY = canvas.height/10 + gridY;
-            let gridValue = 0;
+        for(let i=0; i< canvas.height/30; i++){
+            gridY = (30 + gridY);
 
             this.drawLine(
                 ctx,
@@ -93,16 +111,16 @@ scatterPlotChart(){
                 gridY,
                 '#eeeee'
                 );
-            
+
             //writing grid markers
             ctx.save();
             ctx.fillStyle = '#eeeee';
             ctx.font = "bold 10px Arial";
-            if(i%2===0){
-             ctx.fillText(5 - (i/2) + ' min', 10,gridY - 2);
+            if(i%2!==0){
+                             ctx.fillText(gridY/60 + 'min',0,gridY);
          }
          ctx.restore();
-         gridValue+=2;
+         //this.setXaxisTips();
      }
 
 
@@ -135,7 +153,7 @@ scatterPlotChart(){
         }
     }
 
-    
+
 
 
     componentDidMount() {
@@ -143,10 +161,10 @@ scatterPlotChart(){
       const ctx = canvas.getContext("2d");
 		 // this.drawLine(ctx,0,0,100,100,'red');
        this.scatterPlotChart();
-       
+
    }
 
-   
+
 
    render(){
       console.log("props", this.props)

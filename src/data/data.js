@@ -2,12 +2,12 @@ const plotpoints = [
   {
     "start_time": 125,
     "status": "pass",
-    "duration": 25, // in seconds
+    "duration": 285, // in seconds
   },
   {
     "start_time": 150,
     "status": "error",
-    "duration": 10,
+    "duration": 190,
   },
   {
     "start_time": 80,
@@ -40,9 +40,9 @@ const plotpoints = [
     "duration": 150,
   },
   {
-    "start_time": 50,
+    "start_time": 150,
     "status": "pass",
-    "duration": 40,
+    "duration": 140,
   },
   {
     "start_time": 440,
@@ -50,14 +50,14 @@ const plotpoints = [
     "duration": 220,
   },
   {
-    "start_time": 60,
+    "start_time": 110,
     "status": "error",
-    "duration": 0,
+    "duration": 60,
   },
   {
-    "start_time": 420,
+    "start_time": 40,
     "status": "error",
-    "duration": 15,
+    "duration": 615,
   }
 
 ]
