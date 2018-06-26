@@ -83,11 +83,38 @@ setXaxisTips(){
     
   
 }
+onClick(event){
+    
+    const canvas = this.refs.canvas;
+    let ctx = canvas.getContext("2d");
+    
+    let xpos = event.clientX;
+    let ypos = canvas.height - event.clientY;
+    console.log("clicked ",xpos,ypos)
+    for(let i=0; i<this.options.data.length; i++){
+        console.log("inside loop")
+if(this.options.data[i].start_time>xpos && this.options.data[i].duration>ypos){
+console.log(this.options.data[i])
+    //ctx.fillStyle=color;
+    ctx.beginPath();
+    ctx.translate(0, canvas.height);
+    ctx.scale(1, -1);
+    ctx.arc(this.options.data[i].start_time,(canvas.height - this.options.data[i].duration),10,0,2*Math.PI);
+    // ctx.fillText(upperLeftCornerX+ ' , '+upperLeftCornerY, 10, 2);
+    ctx.lineWidth = 20;
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
 
+    }
+}
+}
 scatterPlotChart(){
+    let me = this;
 	const canvas = this.refs.canvas;
     canvas.width = this.getCanvasWidth();
     canvas.height = this.getCanvasHeight();
+    canvas.addEventListener('click', function(event){me.onClick(event);}, false);
     let ctx = canvas.getContext("2d");
     ctx.translate(0, canvas.height);
     ctx.scale(1, -1);
