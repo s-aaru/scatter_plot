@@ -1,9 +1,11 @@
+/*Static data to use if server is down*/
 const plotpoints = [
   {
     "start_time": 125,
     "status": "pass",
     "duration": 285, // in seconds
-  },
+  }
+  ,
   {
     "start_time": 150,
     "status": "error",
